@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.demo.eos.mate.plist</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/zhouyang/PycharmProjects/eos-mate2/task/task.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+        <key>Minute</key>
+        <integer>9</integer>
+        <key>Hour</key>
+        <integer>15</integer>
+  </dict>
+  <key>StandardOutPath</key>
+<string>/Users/zhouyang/Documents/task/eosmate.log</string>
+<key>StandardErrorPath</key>
+<string>/Users/zhouyang/Documents/task/eosmate.err</string>
+</dict>
+</plist>

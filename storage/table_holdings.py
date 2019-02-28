@@ -4,7 +4,7 @@ class TableHoldings:
     def __init__(self):
         self.db = DataBase().getDB()
         try:
-            create_table_cmd = "CREATE TABLE IF NOT EXISTS HOLDINGS (ACCOUNT TEXT PRIMARY KEY, AMOUNT REAL, RANKING INTEGER, DATE INTEGER)"
+            create_table_cmd = "CREATE TABLE IF NOT EXISTS HOLDINGS (ACCOUNT TEXT, AMOUNT REAL, RANKING INTEGER, DATE INTEGER)"
             self.db.execute(create_table_cmd)
         except Exception as e:
             print(e)
@@ -16,11 +16,11 @@ class TableHoldings:
         cursor.execute(sqlString, v)
         return
 
-    def getLastRank(self):
+    def getLastRank(self, time):
         list = []
         # sqlString = "SELECT * FROM HOLDINGS"
         sqlString = "SELECT * FROM HOLDINGS where DATE=?"
-        v = (0,)
+        v = (time,)
         cursor = self.db.cursor()
         hint = cursor.execute(sqlString, v)
         hit_all = hint.fetchall()
@@ -28,6 +28,9 @@ class TableHoldings:
             list.append(row)
         print('print item end!')
         return list
+
+    def commitDB(self):
+        self.db.commit()
 
     def closeDB(self):
         self.db.close()
