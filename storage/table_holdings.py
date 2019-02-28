@@ -1,7 +1,6 @@
 from storage.db import DataBase
 
 class TableHoldings:
-
     def __init__(self):
         self.db = DataBase().getDB()
         try:
@@ -19,14 +18,14 @@ class TableHoldings:
 
     def getLastRank(self):
         list = []
-        sqlString = "SELECT * FROM HOLDINGS"
-        # sqlString = "SELECT * FROM HOLDINGS where DATE=?"
+        # sqlString = "SELECT * FROM HOLDINGS"
+        sqlString = "SELECT * FROM HOLDINGS where DATE=?"
         v = (0,)
         cursor = self.db.cursor()
-        hint = cursor.execute(sqlString)
+        hint = cursor.execute(sqlString, v)
         hit_all = hint.fetchall()
         for row in hit_all:
-            list.append(row[0])
+            list.append(row)
         print('print item end!')
         return list
 

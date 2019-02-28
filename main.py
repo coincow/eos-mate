@@ -1,5 +1,6 @@
-import magnate
+from magnate import Magnate
 
 if __name__ == "__main__":
     print("main")
-    magnate.getAndStoreData()
+    magnate1 = Magnate()
+    magnate1.getAndStoreData()

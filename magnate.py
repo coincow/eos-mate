@@ -2,32 +2,34 @@ import urllib.request
 import json
 from storage.table_holdings import TableHoldings
 
-def getData():
-    url = r'https://eospark.com/api/tokens/magnate_rank?symbol=eos&account=eosio.token&size=500&amount_type=eosTotalBalance'
-    res = urllib.request.urlopen(url)
-    html = res.read().decode('utf-8')
-    data = json.loads(html)
-    return data['data']['rankings']
+class Magnate:
+    def __init__(self):
+        self.table = TableHoldings()
 
-def storeData(data):
-    table = TableHoldings()
-    for item in data:
-        table.insertOne(item['holding_account'], item['amount'], item['ranking'], 0)
+    def getData(self):
+        url = r'https://eospark.com/api/tokens/magnate_rank?symbol=eos&account=eosio.token&size=500&amount_type=eosTotalBalance'
+        res = urllib.request.urlopen(url)
+        html = res.read().decode('utf-8')
+        data = json.loads(html)
+        return data['data']['rankings']
 
-def getAndStoreData():
-    data = getData()
-    storeData(data)
+    def storeData(self, data):
+        for item in data:
+            self.table.insertOne(item['holding_account'], item['amount'], item['ranking'], 0)
 
-def printData():
-    table = TableHoldings()
-    list = table.getLastRank()
-    for row in list:
-        print(row[0] + "    " + row[1].decode('utf-8') + "    " + row[2].decode('utf-8'))
+    def getAndStoreData(self):
+        data = self.getData()
+        self.storeData(data)
+
+    def printData(self):
+        list = self.table.getLastRank()
+        for row in list:
+            print(row[0] + "    " + str(row[1]) + "    " + str(row[2]))
 
 
 if __name__ == "__main__":
     print("main run")
-    getAndStoreData()
-    printData()
-    table = TableHoldings()
-    table.closeDB()
+    magnate1 = Magnate()
+    magnate1.getAndStoreData()
+    magnate1.printData()
+    magnate1.table.closeDB()
