@@ -24,8 +24,7 @@ class Magnate:
         self.table.commitDB()
 
     def dataReady(self):
-        today = getToday()
-        today_data = self.table.getLastRank(today)
+        today_data = self.table.getLastRank()
         print("xxxxx1----" + str(len(today_data)))
         if len(today_data) == 0:
             return False

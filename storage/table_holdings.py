@@ -1,4 +1,5 @@
 from storage.db import DataBase
+from utils.date_util import getToday
 
 class TableHoldings:
     def __init__(self):
@@ -16,7 +17,8 @@ class TableHoldings:
         cursor.execute(sqlString, v)
         return
 
-    def getLastRank(self, time):
+    def getLastRank(self):
+        time = getToday()
         list = []
         # sqlString = "SELECT * FROM HOLDINGS"
         sqlString = "SELECT * FROM HOLDINGS where DATE=?"
