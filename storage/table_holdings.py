@@ -29,6 +29,17 @@ class TableHoldings:
         print('print item end!')
         return list
 
+    def getAllData(self):
+        list = []
+        sqlString = "SELECT * FROM HOLDINGS"
+        cursor = self.db.cursor()
+        hint = cursor.execute(sqlString)
+        hit_all = hint.fetchall()
+        for row in hit_all:
+            list.append(row)
+        print('print all data end!')
+        return list
+
     def commitDB(self):
         self.db.commit()
 

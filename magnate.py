@@ -37,8 +37,7 @@ class Magnate:
         self.storeData(data)
 
     def printData(self):
-        today = getToday()
-        list = self.table.getLastRank(today)
+        list = self.table.getAllData()
         print("xxxxx2----"+str(len(list)))
         for row in list:
             print(row[0] + "    " + str(row[1]) + "    " + str(row[2]) + "    " + str(row[3]))
